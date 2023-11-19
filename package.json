@@ -1,0 +1,18 @@
+{
+  "type": "module",
+  "name": "entrega1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "node src/main.js",
+    "dev": "nodemon src/app.js"
+  },
+  "keywords": [],
+  "author": "Ignacio Tomas Leonardi",
+  "license": "ISC",
+  "dependencies": {
+    "crypto": "^1.0.1",
+    "express": "^4.18.2"
+  }
+}

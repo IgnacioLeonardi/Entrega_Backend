@@ -43,7 +43,7 @@ export async function postCartController(req, res) {
   }
 }
 
-export async function deleteCartController() {
+export async function deleteCartController(req, res) {
   const { id } = req.params;
   try {
     await cartManager.deleteCart(id);

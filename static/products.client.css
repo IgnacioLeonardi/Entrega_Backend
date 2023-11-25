@@ -1,0 +1,71 @@
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: 20px;
+}
+
+.product-grid img {
+  max-width: 100%;
+  height: auto;
+}
+
+.product-grid li {
+  list-style: none;
+  text-align: center;
+}
+
+.product-item img {
+  cursor: pointer; /* Cambiar el cursor a pointer */
+}
+#productHeader, .h1-products{
+  text-align: center;
+}
+li {
+  list-style: decimal;
+}
+.aBotonTiempoReal{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+.botonTiempoReal{
+  border-radius: 3px;
+  display: inline-block;
+  text-decoration: none;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.3);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+  background-color: #3cc93f;
+}
+.btnEliminar{
+  border-radius: 3px;
+  display: inline-block;
+  text-decoration: none;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.3);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+  background-color: rgb(156, 99, 99);
+}
+.btn{
+  border-radius: 3px;
+  display: inline-block;
+  padding: 6px 20px;
+  text-decoration: none;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.3);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+  background-color: #3cc93f;
+}
+.formProductoNuevo{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: center;
+  align-items: stretch; 
+}
+.formProductoNuevo fieldset{
+  display: flex;
+  justify-content: space-between;
+  border: 0;
+}
+h2{
+  text-align: center;
+}

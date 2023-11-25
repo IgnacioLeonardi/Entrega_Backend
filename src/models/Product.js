@@ -1,30 +1,26 @@
-export class Product {
-  constructor({
-    id,
-    title,
-    description,
-    code,
-    price,
-    status = true,
-    stock,
-    category,
-    thumbnail,
-  }) {
-    this.id = notNull(id);
-    this.title = notNull(title);
-    this.description = notNull(description);
-    this.code = notNull(code);
-    this.price = notNull(Number(price));
-    this.status = notNull(Boolean(status));
-    this.stock = notNull(Number(stock));
-    this.category = notNull(category);
-    this.thumbnail = notNull([thumbnail]);
+export function notNull(value) {
+  if (!value) {
+    throw new Error('Todos los campos deben estar completos.')
   }
+  return (value)
+}
+function notNullAndNumber(value) {
+  if (!value || typeof value !== 'number' || isNaN(value)) {
+    throw new Error('Todos los campos deben estar completos y deben ser caracteres numericos.')
+  }
+  return (value)
 }
 
-export function notNull(valor) {
-  if (valor === null || valor === undefined) {
-    throw new Error("Hay valores invalidos");
+export class Product {
+  constructor({ id, title, price, description, thumbnail, code, stock, category, status }) {
+    this.id = id
+    this.title = notNull(title)
+    this.description = notNull(description)
+    this.price = price
+    this.thumbnail = thumbnail
+    this.code = notNull(code)
+    this.category = notNull(String(category))
+    this.stock = stock
+    this.status = notNull(Boolean(status))
   }
-  return valor;
 }

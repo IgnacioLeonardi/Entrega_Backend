@@ -31,7 +31,7 @@ class CartManager {
   }
 
   async deleteCart(id) {
-    const carts = await this.getProducts();
+    const carts = await this.getCarts();
     const cartIndex = carts.findIndex((cart) => cart.id === id);
     if (cartIndex !== -1) {
       carts.splice(cartIndex, 1);

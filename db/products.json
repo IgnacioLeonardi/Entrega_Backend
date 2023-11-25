@@ -1,24 +1,24 @@
 [
   {
-    "id": "5fb05d00-a67d-40bf-8f9c-ee955729eecd",
-    "title": "pruebass",
-    "description": "prueba",
-    "code": 123,
-    "price": 123,
-    "status": "dfgdg",
-    "stock": 121212123,
-    "category": "compus",
-    "thumbnail": "urlimagen"
+    "id": "b5400623-201a-4247-84cf-b805e4fbb304",
+    "title": "Jack Daniels",
+    "description": "Whisky",
+    "price": 60000,
+    "thumbnail": "https://www.blogdelfotografo.com/wp-content/uploads/2020/12/producto_fondo_negro.webp",
+    "code": "asdasdsdf",
+    "category": "Bebidas",
+    "stock": 456,
+    "status": true
   },
   {
-    "id": "0392431c-0d7a-4cdb-8854-ea81109c0550",
-    "title": "prueba2",
-    "description": "prueba2",
-    "code": 123456,
-    "price": 123456,
-    "status": "asdasd",
-    "stock": 121,
-    "category": "notebook",
-    "thumbnail": "SIN IMG"
+    "id": "ff38121b-d2ec-44af-be3e-7cad39dfff97",
+    "title": "Jack Daniels",
+    "description": "Whisky",
+    "price": 150000,
+    "thumbnail": "https://www.blogdelfotografo.com/wp-content/uploads/2020/12/producto_fondo_negro.webp",
+    "code": "asdasd",
+    "category": "Bebidas",
+    "stock": 456,
+    "status": true
   }
 ]

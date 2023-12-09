@@ -1,8 +1,8 @@
-import { cartManager } from "../services/CartManager.js";
+import { cartsManager } from "../dao/mongodb/mongodb.js";
 
 export async function getCartsController(req, res) {
   let limit = req.query.limit;
-  const data = await cartManager.getCarts();
+  const data = await cartsManager.find();
   try {
     if (!limit) {
       return res.json(data);
@@ -17,7 +17,7 @@ export async function getCartsController(req, res) {
 export async function getCartByIdController(req, res) {
   const { cid } = req.params;
   try {
-    const cartForId = await cartManager.getCartById(cid);
+    const cartForId = await cartsManager.findById(cid);
     return res.json({ cartForId });
   } catch (error) {
     res.status(404).send({ message: error.message });
@@ -27,7 +27,7 @@ export async function getCartByIdController(req, res) {
 export async function postAddProductToCartController(req, res) {
   const { cid, pid } = req.params;
   try {
-    await cartManager.addProductToCart(cid, pid);
+    await cartsManager.create(cid, pid);
     return res.send(cid);
   } catch (error) {
     res.status(400).send({ message: error.message });
@@ -36,7 +36,7 @@ export async function postAddProductToCartController(req, res) {
 
 export async function postCartController(req, res) {
   try {
-    await cartManager.addCart(req.body);
+    await cartsManager.create(req.body);
     res.json(req.body);
   } catch (error) {
     res.status(400).send({ message: error.message });
@@ -46,7 +46,7 @@ export async function postCartController(req, res) {
 export async function deleteCartController(req, res) {
   const { id } = req.params;
   try {
-    await cartManager.deleteCart(id);
+    await cartsManager.deleteOne(id);
     res.json(req.body);
   } catch (error) {
     res.status(404).send({ message: error.message });

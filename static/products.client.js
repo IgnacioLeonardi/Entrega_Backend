@@ -167,7 +167,6 @@ const sendProductData = async (username) => {
       productItem.appendChild(title);
       productItem.appendChild(price);
       productItem.appendChild(deleteButton);
-
       productList.appendChild(productItem);
     }
   });

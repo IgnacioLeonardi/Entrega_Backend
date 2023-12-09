@@ -4,8 +4,8 @@ import { Server } from 'socket.io'
 
 import { apiRouter } from "./routes/api.router.js";
 import { webRouter } from "./routes/web.router.js";
-import { productManager } from "./services/ProductManager.js";
-
+import { productsManager } from './dao/mongodb/mongodb.js';
+import { messagesManager } from './dao/mongodb/mongodb.js';
 export const BASE_URL = "http://localhost:8080";
 const app = express();
 
@@ -33,11 +33,11 @@ app.use("/api", apiRouter);
 webSocketServer.on("connection", async (socket) => {
   socket.broadcast.emit("new-user", socket.handshake.auth.username);
 
-  socket.emit("getProducts", await productManager.getProducts());
+  socket.emit("getProducts", await productsManager.find());
 
   socket.on("deleteProduct", async (id) => {
-    await productManager.deleteProduct(id);
-    webSocketServer.emit("getProducts", await productManager.getProducts());
+    await productsManager.deleteOne(id);
+    webSocketServer.emit("getProducts", await productsManager.find());
   });
 
   socket.on(
@@ -45,11 +45,21 @@ webSocketServer.on("connection", async (socket) => {
     async (
       objeto
     ) => {
-      await productManager.addProduct(objeto);
-      webSocketServer.emit("getProducts", await productManager.getProducts());
+      await productsManager.create(objeto);
+      webSocketServer.emit("getProducts", await productsManager.find());
     }
   );
   socket.on("disconnecting", () => {
     socket.broadcast.emit("user-disconnected", socket.handshake.auth.username);
+  });
+  socket.emit("getMessages", await messagesManager.find());
+
+  socket.on("addMessage", async ({ nombreUsuario, emailUsuario, message }) => {
+    await messagesManager.create({
+      user: nombreUsuario,
+      emailUser: emailUsuario,
+      content: message,
+    });
+    webSocketServer.emit("getMessages", await messagesManager.find());
   });
 });

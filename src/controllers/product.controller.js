@@ -1,9 +1,9 @@
-import { productManager } from "../services/ProductManager.js";
+import { productsManager } from "../dao/mongodb/mongodb.js";
 
 export async function getProductController(req, res) {
   let limit = Number(req.query.limit);
   try {
-    const data = await productManager.getProducts();
+    const data = await productsManager.find();
     if (!limit) {
       return res.json(data);
     }
@@ -17,7 +17,7 @@ export async function getProductController(req, res) {
 export async function getProductControllerId(req, res) {
   const id = req.params.id;
   try {
-    const productForId = await productManager.getProductById(id);
+    const productForId = await productsManager.findById(id);
     return res.json({ productForId });
   } catch (error) {
     res.status(404).send({ message: error.message });
@@ -26,7 +26,7 @@ export async function getProductControllerId(req, res) {
 
 export async function postProductController(req, res) {
   try {
-    await productManager.addProduct(req.body);
+    await productsManager.create(req.body);
     res.json(req.body);
   } catch (error) {
     res.status(400).send({ message: error.message });
@@ -36,7 +36,7 @@ export async function postProductController(req, res) {
 export async function putProductController(req, res) {
   const { id } = req.params;
   try {
-    await productManager.updateProduct(id, req.body);
+    await productsManager.updateOne(id, req.body);
     res.json(id);
   } catch (error) {
     res.status(404).send({ message: error.message });
@@ -46,7 +46,7 @@ export async function putProductController(req, res) {
 export async function deleteProductController(req, res) {
   const { id } = req.params;
   try {
-    await productManager.deleteProduct(id);
+    await productsManager.deleteOne(id);
     res.json(req.body);
   } catch (error) {
     res.status(404).send({ message: error.message });

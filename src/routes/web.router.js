@@ -10,7 +10,9 @@ webRouter.get("/", (req, res) => {
     res.status(500).json({ message: "Error loading home" });
   }
 });
-
+webRouter.get('/chat', (req, res) => {
+  res.render('chat.handlebars', { titulo: 'Chat' })
+})
 webRouter.get("/realTimeProducts", (req, res) => {
   try {
     console.log("Cliente conectado");

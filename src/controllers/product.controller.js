@@ -36,7 +36,7 @@ export async function postProductController(req, res) {
 export async function putProductController(req, res) {
   const { id } = req.params;
   try {
-    await productsManager.updateOne(id, req.body);
+    await productsManager.updateOne({_id: id }, {$set: req.body});
     res.json(id);
   } catch (error) {
     res.status(404).send({ message: error.message });

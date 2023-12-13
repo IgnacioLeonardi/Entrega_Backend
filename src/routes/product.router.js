@@ -12,3 +12,4 @@ productRouter.get("/:id", getProductControllerId);
 productRouter.post("/", postProductController);
 productRouter.put("/:id", putProductController);
 productRouter.delete("/:id", deleteProductController);
+

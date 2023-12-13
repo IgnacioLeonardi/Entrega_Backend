@@ -27,8 +27,8 @@ export async function getCartByIdController(req, res) {
 export async function postAddProductToCartController(req, res) {
   const { cid, pid } = req.params;
   try {
-    await cartsManager.create(cid, pid);
-    return res.send(cid);
+    await cartsManager.addProductToCart(cid, pid);
+    return res.send( await cartsManager.findById(cid));
   } catch (error) {
     res.status(400).send({ message: error.message });
   }
@@ -46,7 +46,7 @@ export async function postCartController(req, res) {
 export async function deleteCartController(req, res) {
   const { id } = req.params;
   try {
-    await cartsManager.deleteOne(id);
+    await cartsManager.deleteOne({ _id: id });
     res.json(req.body);
   } catch (error) {
     res.status(404).send({ message: error.message });

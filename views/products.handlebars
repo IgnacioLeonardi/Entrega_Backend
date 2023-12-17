@@ -1,0 +1,43 @@
+<h1 class="h1-products">Lista de Productos</h1>
+{{#if hayDocs}}
+<ul>
+  {{#each docs}}
+  <li>Nombre: {{this.title}} - Categoria: {{this.category}} - Precio: {{this.price}}</li>
+  <button onclick="agregarAlCarrito('{{this._id}}')">Agregar al carrito</button>
+  {{/each}}
+</ul>
+{{else}}
+No hay productos que mostrar...<br>
+{{/if}}
+
+<a {{#if hasPrevPage}} href="/?limit={{limit}}&page={{prevPage}}" {{/if}}>Prev</a>
+[{{ page }}]
+<a {{#if hasNextPage}} href="/?limit={{limit}}&page={{nextPage}}" {{/if}}>Next</a><br>
+Página: <input type="text"> <button onclick="irAPag({{limit}})">ir</button>
+<script>
+  function irAPag(limit) {
+    const pagDeseada = document.querySelector('input').value || 1
+    window.location = `/?limit=${limit}&page=${pagDeseada}`
+  }
+</script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script src="../static/cart.client.js"></script>
+<script>
+  async function agregarAlCarrito(productoId) {
+    await fetch(
+      `api/carts/b899a746-9c62-4b19-90de-cfa22444cdea/product/${productoId}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    ).then((response) => {
+      if (!response.ok) {
+        throw new Error("Error al agregar al carrito");
+      }
+      return response.json();
+    });
+  }
+</script>

@@ -69,7 +69,7 @@ const sendProductData = async (username) => {
     const price = Number(document.getElementById("productPrice").value);
     const thumbnail = "https://www.blogdelfotografo.com/wp-content/uploads/2020/12/producto_fondo_negro.webp";
     const code = document.getElementById("productCode").value;
-    const category = document.getElementById("productCategory").value;
+    const category = document.getElementById("productCategory").value.toLowerCase();
     const stock = Number(document.getElementById("productStock").value);
     const status = document.getElementById("productStatus").checked; // Para checkbox
 

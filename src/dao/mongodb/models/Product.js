@@ -1,5 +1,9 @@
 import { Schema, model } from "mongoose";
 import { randomUUID } from "node:crypto";
+import mongoosePaginate from 'mongoose-paginate-v2'
+
+const productsCollection = 'products'
+
 const productSchema = new Schema(
   {
     _id: { type: String, default: randomUUID },
@@ -9,7 +13,7 @@ const productSchema = new Schema(
     price: { type: Number, required: true },
     status: { type: Boolean, default: true },
     stock: { type: Number, default: 0 },
-    category: { type: String, default: "Otros" },
+    category: { type: String, default: "otros" },
     thumbnail: { type: [String], default: [] },
   },
   {
@@ -18,4 +22,6 @@ const productSchema = new Schema(
   }
 );
 
-export const manager = model("products", productSchema);
+productSchema.plugin(mongoosePaginate)
+
+export const manager = model(productsCollection, productSchema);

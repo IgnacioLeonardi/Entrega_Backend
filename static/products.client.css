@@ -15,21 +15,27 @@
 }
 
 .product-item img {
-  cursor: pointer; /* Cambiar el cursor a pointer */
+  cursor: pointer;
+  /* Cambiar el cursor a pointer */
 }
-#productHeader, .h1-products{
+
+#productHeader,
+.h1-products {
   text-align: center;
 }
+
 li {
   list-style: decimal;
 }
-.aBotonTiempoReal{
+
+.aBotonTiempoReal {
   display: flex;
   align-items: center;
   justify-content: center;
   text-decoration: none;
 }
-.botonTiempoReal{
+
+.botonTiempoReal {
   border-radius: 3px;
   display: inline-block;
   text-decoration: none;
@@ -37,7 +43,8 @@ li {
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
   background-color: #3cc93f;
 }
-.btnEliminar{
+
+.btnEliminar {
   border-radius: 3px;
   display: inline-block;
   text-decoration: none;
@@ -45,7 +52,8 @@ li {
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
   background-color: rgb(156, 99, 99);
 }
-.btn{
+
+.btn-enviar {
   border-radius: 3px;
   display: inline-block;
   padding: 6px 20px;
@@ -54,41 +62,67 @@ li {
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
   background-color: #3cc93f;
 }
-.formProductoNuevo{
+
+.formProductoNuevo {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
   align-content: center;
-  align-items: stretch; 
+  align-items: stretch;
 }
-.formProductoNuevo fieldset{
+
+.formProductoNuevo fieldset {
   display: flex;
   justify-content: space-between;
   border: 0;
 }
-h2{
+
+h2 {
   text-align: center;
 }
-.botones{
+
+.botones {
   display: flex;
   justify-content: space-evenly;
 }
-.chat__container{
+
+.chat__container {
   display: flex;
   flex-direction: column;
   padding: 15px;
   align-items: center;
 }
-.form__messages{
+
+.form__messages {
   display: flex !important;
   flex-direction: column;
   padding: auto;
 }
-.input__message{
+
+.input__message {
   width: 300px;
   height: 60px;
   padding: 5px;
 }
-.h1Chat{
+
+.h1Chat {
+  text-align: center;
+}
+
+.navbar-custom {
+  background-color: black !important;
+  display: flex !important;
+}
+
+.form-navbar {
+  display: flex !important;
+  justify-content: space-between !important;
+}
+
+.img-cart {
+  height: 25px;
+}
+
+#productList {
   text-align: center;
 }

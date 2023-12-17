@@ -1,12 +1,17 @@
 import { Schema, model } from "mongoose";
 import { randomUUID } from "node:crypto";
 import { productsManager } from "../mongodb.js"
-import { cartsManager } from "../mongodb.js";
 
 const cartSchema = new Schema(
   {
     _id: { type: String, default: randomUUID },
-    products: { type: [Object], default: [] },
+    products: [
+      {
+        _id: { type: String, ref: "products" },
+        quantity: { type: Number, default: 1 },
+      },
+    ],
+    default: []
   },
   {
     strict: "throw",
@@ -15,18 +20,15 @@ const cartSchema = new Schema(
       addProductToCart: async function (cid, pid) {
         const initialQuantity = 1;
 
-        // Obtener el carrito y el producto
-        const cart = await cartsManager.findById(cid);
+        const cart = await model("carts", cartSchema).findById(cid);
         const product = await productsManager.findById(pid).lean();
 
-        // Verificar si el producto ya está en el carrito
         const productIndexFind = cart.products.findIndex(
           (p) => p._id === product._id
         );
 
         if (productIndexFind === -1) {
-          // Si el producto no está en el carrito, agregarlo con la cantidad inicial
-          await cartsManager.findOneAndUpdate(
+          await model("carts", cartSchema).findOneAndUpdate(
             { _id: cid },
             {
               $addToSet: {
@@ -35,8 +37,7 @@ const cartSchema = new Schema(
             }
           );
         } else {
-          // Si el producto ya está en el carrito, actualizar la cantidad
-          await cartsManager.findOneAndUpdate(
+          await model("carts", cartSchema).findOneAndUpdate(
             { _id: cid, "products._id": product._id },
             {
               $inc: {
@@ -46,8 +47,35 @@ const cartSchema = new Schema(
           );
         }
       },
+      deleteProductOnCart: async function (cid, pid) {
+        try {
+          const cart = await model("carts", cartSchema).findById(cid);
+          const product = await productsManager.findById(pid).lean();
+
+          const productIndexFind = cart.products.findIndex(
+            (p) => p._id === product._id
+          );
+          if (productIndexFind !== -1) {
+            cart.products.splice(productIndexFind, 1);
+
+            await cart.save();
+
+            return cart;
+          } else {
+            throw new Error("Producto no encontrado en el carrito");
+          }
+        } catch (error) {
+          console.log(error);
+        }
+      },
+      updateProductQuantityOnCart: async function (cid, pid) { },
     },
   }
 );
+
+cartSchema.pre("find", function (next) {
+  this.populate("products");
+  next();
+});
 
 export const manager = model("carts", cartSchema);

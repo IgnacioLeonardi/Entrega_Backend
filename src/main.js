@@ -15,7 +15,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 const server = app.listen(8080, () => {
-  console.log(`Conectado: ${BASE_URL}`);
+  console.log(`Conect: ${BASE_URL}`);
 });
 
 
